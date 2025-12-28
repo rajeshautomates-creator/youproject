@@ -12,7 +12,7 @@ RUN npm install
 COPY prisma ./prisma/
 
 # Generate prisma client with a placeholder URL to avoid build-time errors
-RUN DATABASE_URL="postgresql://postgres:2sn8bjdiu6fjswck@projectyoushorts-postgresql-oe6bjl:5432/shorts_ai" npx prisma generate
+RUN DATABASE_URL="postgresql://postgres:2sn8bjdiu6fjswck@projectyoushorts-postgresql-oe6bjl:5432/shorts_ai" npx prisma@6.1.0 generate
 
 COPY . .
 RUN npm run build
