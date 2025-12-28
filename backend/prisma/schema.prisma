@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Short {
+  id          String   @id @default(uuid())
+  topic       String
+  title       String?
+  description String?
+  tags        String?
+  script      Json?
+  language    String   @default("English")
+  duration    Int      @default(60)
+  style       String   @default("Modern")
+  voice       String?
+  cta         String?
+  videoPath   String?
+  status      String   @default("PENDING") // PENDING, PROCESSING, COMPLETED, FAILED
+  youtubeUrl  String?
+  renders     Render[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Render {
+  id        String   @id @default(uuid())
+  shortId   String
+  short     Short    @relation(fields: [shortId], references: [id])
+  status    String   @default("PENDING")
+  logs      String?  @db.Text
+  progress  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Setting {
+  id    String @id @default(uuid())
+  key   String @unique
+  value String @db.Text
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  level     String   @default("INFO")
+  message   String
+  metadata  Json?
+  createdAt DateTime @default(now())
+}
