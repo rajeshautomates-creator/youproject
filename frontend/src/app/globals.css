@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020617;
+  --foreground: #f8fafc;
+  --primary: #6366f1;
+  --accent: #22d3ee;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+}
+
+.glass {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.studio-gradient {
+  background: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
+}
+
+.studio-glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
